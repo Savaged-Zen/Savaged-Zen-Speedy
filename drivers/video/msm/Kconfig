@@ -1,3 +1,4 @@
+source "drivers/video/msm/vidc/Kconfig"
 config FB_MSM
 	tristate
 	depends on FB && ARCH_MSM
@@ -8,7 +9,7 @@ config FB_MSM
 
 config FB_MSM_LEGACY_MDP
 	bool
-	depends on FB_MSM && (MSM_MDP31 || MSM_MDP22)
+	depends on FB_MSM && (MSM_MDP30 || MSM_MDP31 || MSM_MDP302)
 	default y
 
 config FB_MSM_MDP_PPP
@@ -18,7 +19,7 @@ config FB_MSM_MDP_PPP
 
 config FB_MSM_LCDC
 	bool "Support for integrated LCD controller in MDP3/4"
-	depends on FB_MSM && (MSM_MDP31 || MSM_MDP40)
+	depends on FB_MSM && (MSM_MDP31 || MSM_MDP302 || MSM_MDP40)
 	default y
 
 config FB_MSM_MDDI
@@ -35,6 +36,16 @@ config FB_MSM_MDDI_NOVTEC
 	bool "Support for Novtec MDDI panels"
 	depends on FB_MSM_MDDI
 	default n
+
+config FB_MSM_OVERLAY
+	bool "Support for overlay in MSM7X30"
+	depends on FB_MSM && MSM_MDP40
+	default y
+
+config FB_MSM_DTV
+	depends on FB_MSM_OVERLAY
+	bool
+	default n
 	
 config GPU_MSM_KGSL
 	tristate "MSM 3D Graphics driver for Adreno class GPUs"
@@ -47,6 +58,15 @@ config GPU_MSM_KGSL
 	  use hardware accelerated OpenGL ES 2.0 and 1.1 on these
 	  chips.
 
+config GPU_MSM_KGSL_ADRENO205
+        bool "MSM 3D Graphics driver for Adreno205"
+        depends on FB_MSM && GPU_MSM_KGSL && ARCH_MSM7X30
+        default y
+        help
+          3D graphics driver for Adreno205. Required to
+          use hardware accelerated OpenGL ES 2.0 and 1.1 on these
+          chips.
+
 config MSM_KGSL_MMU
 	bool "Turn on MMU for graphics driver "
 	depends on GPU_MSM_KGSL && MMU
@@ -54,6 +74,14 @@ config MSM_KGSL_MMU
 	help
 	  If enabled, the GPU driver will allocate memory from vmalloc
 	  and enable the use of GPU MMU, instead of using pmem.
+
+config MSM_ROTATOR
+        tristate "MSM Offline Image Rotator Driver"
+        depends on ARCH_MSM7X30 && ANDROID_PMEM
+        default y
+        help
+          This driver provides support for the image rotator HW block in the
+          MSM 7x30 SoC.
 
 config MSM_HDMI
 	bool "Support for HDMI in QCT platform"
