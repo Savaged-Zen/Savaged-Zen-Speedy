@@ -127,6 +127,14 @@ obj-$(CONFIG_MACH_SUPERSONIC) += htc_wifi_nvs.o htc_bluetooth.o
 obj-$(CONFIG_MACH_SUPERSONIC) += htc_acoustic_qsd.o
 obj-$(CONFIG_HTC_BATTCHG) += htc_battery.o
 
+obj-$(CONFIG_MACH_SPEEDY)+= board-speedy.o
+obj-$(CONFIG_MACH_SPEEDY)+= board-speedy-keypad.o
+obj-$(CONFIG_MACH_SPEEDY)+= board-speedy-microp.o
+obj-$(CONFIG_MACH_SPEEDY)+= board-speedy-audio.o
+obj-$(CONFIG_MACH_SPEEDY)+= board-speedy-mmc.o board-speedy-wifi.o
+obj-$(CONFIG_MACH_SPEEDY)+= board-speedy-rfkill.o
+obj-$(CONFIG_MACH_SPEEDY)+= board-speedy-panel.o htc_bluetooth.o
+
 obj-$(CONFIG_HTC_BATTCHG) += htc_battery.o
 obj-$(CONFIG_HTC_PWRSINK) += htc_pwrsink.o
 obj-$(CONFIG_HTC_PWRSPLY) += htc_power_supply.o

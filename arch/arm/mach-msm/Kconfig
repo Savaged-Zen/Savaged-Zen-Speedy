@@ -136,31 +136,54 @@ config MSM_AMSS_VERSION
 	default 6220 if MSM_AMSS_VERSION_6220
 	default 6225 if MSM_AMSS_VERSION_6225
 	default 6350 if MSM_AMSS_VERSION_6350
-        default 3200 if MSM_AMSS_VERSION_3200
+	default 6355 if MSM_AMSS_VERSION_6355
+	default 1355 if MSM_AMSS_VERSION_1355
+	default 4725 if MSM_AMSS_VERSION_4725
+	default 4735 if MSM_AMSS_VERSION_4735
+	default 4410 if MSM_AMSS_VERSION_4410
+	default 3200 if MSM_AMSS_VERSION_3200
+	default 1170 if MSM_AMSS_VERSION_1170
+	default 1200 if MSM_AMSS_VERSION_1200
 
-choice
 	prompt "AMSS modem firmware version"
 
-	depends on ARCH_MSM7X00A || ARCH_QSD8X50
 	default MSM_AMSS_VERSION_6225
 
 	config MSM_AMSS_VERSION_6210
 		bool "6.2.10"
-		select MSM_LEGACY_7X00A_AMSS
 
 	config MSM_AMSS_VERSION_6220
 		bool "6.2.20"
-		select MSM_LEGACY_7X00A_AMSS
 
 	config MSM_AMSS_VERSION_6225
 		bool "6.2.20 + New ADSP"
-		select MSM_LEGACY_7X00A_AMSS
 
 	config MSM_AMSS_VERSION_6350
 		bool "6.3.50"
-         
-         config MSM_AMSS_VERSION_3200
- 	        bool "3.2.00"
+
+	config MSM_AMSS_VERSION_6355
+		bool "6.3.55"
+
+	config MSM_AMSS_VERSION_1355
+		bool "1.3.55"
+
+	config MSM_AMSS_VERSION_4725
+		bool "4.7.25"
+
+	config MSM_AMSS_VERSION_4735
+		bool "4.7.25 + SBA 3001"
+
+	config MSM_AMSS_VERSION_4410
+		bool "4.4.10"
+
+	config MSM_AMSS_VERSION_3200
+		bool "3.2.00"
+
+	config MSM_AMSS_VERSION_1170
+		bool "1.1.70"
+
+	config MSM_AMSS_VERSION_1200
+		bool "1.2.00"
 endchoice
 
 menu "Qualcomm MSM Board Type"
@@ -283,6 +306,14 @@ config MACH_SUPERSONIC
 	bool "Supersonic (HTC EVO 4G)"
 	help
 	  Select this to support the Supersonic device
+
+config MACH_SPEEDY
+       depends on ARCH_MSM7X30
+       depends on !MSM_STACKED_MEMORY
+       default n
+       bool "MSM7x30 SPEEDY"
+       help
+         Support for the Qualcomm MSM7x30 Speedy board.
 
 config MACH_QSD8X50_FFA
 	depends on ARCH_QSD8X50
